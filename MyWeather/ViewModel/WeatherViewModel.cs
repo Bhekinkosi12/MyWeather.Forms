@@ -60,6 +60,7 @@ namespace MyWeather.ViewModels
             set { SetProperty(ref temp, value); }
         }
 
+
         string condition = string.Empty;
         public string Condition
         {
@@ -80,6 +81,8 @@ namespace MyWeather.ViewModels
         public ICommand GetWeatherCommand =>
                 getWeather ??
                 (getWeather = new Command(async () => await ExecuteGetWeatherCommand()));
+                
+                
 
         private async Task ExecuteGetWeatherCommand()
         {
@@ -87,6 +90,8 @@ namespace MyWeather.ViewModels
                 return;
 
             IsBusy = true;
+            
+            
             try
             {
                 WeatherRoot weatherRoot = null;
@@ -169,6 +174,8 @@ namespace MyWeather.ViewModels
                 request = true;                
             }
 
+
+
             if (request || permissionStatus != PermissionStatus.Granted)
             {
                 var newStatus = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Location);
@@ -190,6 +197,9 @@ namespace MyWeather.ViewModels
                     return false;
                 }
             }
+
+
+
 
             return true;
         }
